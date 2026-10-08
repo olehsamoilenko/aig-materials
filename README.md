@@ -11,9 +11,10 @@ registration: **https://olehsamoilenko.github.io/aig-materials/**
 | `/course/intro/` | Introduction to Autonomous Systems |
 | `/logo.png`, `/logo-text.png` | The AIG mark and wordmark — other repos hot-link them, keep the names |
 
-**Deploying is pushing.** Every push to `main` runs [`build.py`](build.py) in GitHub Actions
-and publishes the result ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) —
-about a minute; progress in the **Actions** tab. Nothing to install, nothing to build by hand.
+**Deploying is building and pushing.** [`build.py`](build.py) writes the site into `docs/`,
+which is committed; GitHub Pages publishes `docs/` from `main` on every push — about a minute.
+Always run `python3 build.py` and commit `docs/` together with your change: a push without the
+rebuilt `docs/` changes nothing on the site. Python 3 only, nothing to install.
 
 ## Adding a lecture
 
@@ -37,10 +38,16 @@ about a minute; progress in the **Actions** tab. Nothing to install, nothing to 
    `intro` starts at Lecture 1, so `index` = N; `engineering` starts at Lecture 0, so `index` =
    N + 1. A link with only `list` and `index` (no `v=`) does not work — YouTube then starts at
    the first video.
-4. **Commit and push** (or open a pull request — it deploys when merged).
+4. **Build, commit and push** (or open a pull request — it deploys when merged):
+   ```bash
+   python3 build.py
+   git add slides courses.json docs
+   git commit -m "Intro: Lecture 6 — State Estimation (II)"
+   git push
+   ```
 
 A lecture without a video shows its PDF alone. If `courses.json` lists a PDF that is not in
-`slides/`, the build fails and nothing is deployed — the live site stays as it was.
+`slides/`, the build fails — fix it before committing; never commit `docs/` from a failed build.
 
 **`engineering` is synced from its deck repo** (Marp slides, kept separately and not public):
 its PDFs and its `"lectures"` are written from the decks' covers, so a hand edit to them would be
@@ -53,16 +60,16 @@ python3 tools/sync_engineering.py PATH/TO/DECKS # or anywhere else
 
 The sync lists a deck once its PDF has been exported next to it, copies that PDF into
 `slides/engineering/`, and takes the title, subtitle and topics from the cover. It deletes
-nothing. Then add the video (above) and commit.
+nothing. Then add the video (above), build and commit.
 
 ## Checking before pushing
 
 ```bash
 python3 build.py                          # prints the lectures per course
-python3 -m http.server 8000 -d _site      # http://localhost:8000/ — Ctrl+C to stop
+python3 -m http.server 8000 -d docs       # http://localhost:8000/ — Ctrl+C to stop
 ```
 
-`_site/` is output only — deleted and rebuilt on every build, not committed.
+`docs/` is output only — deleted and rebuilt on every build, so never put files there.
 
 ## Other changes
 
@@ -81,13 +88,15 @@ python3 -m http.server 8000 -d _site      # http://localhost:8000/ — Ctrl+C to
 | `slides/<course>/` | The lecture PDFs |
 | `templates/` | `courses.html` (all courses) and `course.html` (one course) |
 | `assets/` | `style.css` and the logos, copied to the site root |
-| `build.py` | Fills the templates → `_site/`. Python 3, standard library only |
+| `build.py` | Fills the templates → `docs/`. Python 3, standard library only |
+| `docs/` | The built site, as published — never edit by hand |
 | `tools/sync_engineering.py` | Pulls the engineering lectures in from the deck repo |
 | `CLAUDE.md` | Conventions for an AI agent working in this repo |
-| `.github/workflows/deploy.yml` | Builds and publishes on every push to `main` |
+| `.claude/skills/deploy/` | Claude Code `/deploy <pdf>`: all of "Adding a lecture" — fills `courses.json`, finds the video, builds, commits and pushes |
 
 ## Access and setup
 
 - **To contribute:** the owner adds you under **Settings → Collaborators** (then you push to
   `main`), or fork and open a pull request.
-- **One-time:** **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+- **One-time:** **Settings → Pages → Build and deployment → Source: Deploy from a branch →
+  `main`, `/docs`**.

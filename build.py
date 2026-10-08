@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Build the site into _site/: an all-courses page and one page per course.
+"""Build the site into docs/: an all-courses page and one page per course.
 
-    python3 build.py                          # -> _site/
-    python3 -m http.server 8000 -d _site      # preview at http://localhost:8000/
+    python3 build.py                          # -> docs/
+    python3 -m http.server 8000 -d docs       # preview at http://localhost:8000/
 
 Everything on the site comes from courses.json; each lecture's PDF is slides/<slug>/<pdf>.
-On every push to main, GitHub Actions runs this and publishes _site/
-(.github/workflows/deploy.yml) — nobody needs to build by hand to deploy.
+GitHub Pages publishes docs/ as it is on main (Deploy from a branch: main, /docs), so build
+and commit docs/ together with the change — a push without it changes nothing on the site.
 
-    _site/index.html          a redirect to HOME
-    _site/courses/            all courses              (templates/courses.html)
-    _site/course/<slug>/      one course + its slides/ (templates/course.html)
-    _site/logo*.png, style.css                         (assets/)
+    docs/index.html           a redirect to HOME
+    docs/courses/             all courses              (templates/courses.html)
+    docs/course/<slug>/       one course + its slides/ (templates/course.html)
+    docs/logo*.png, style.css                          (assets/)
 
-_site/ is build output only: it is deleted and rebuilt every time, so never keep files there.
+docs/ is build output only: it is deleted and rebuilt every time, so never keep files there.
 """
 import html
 import json
@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-OUT = HERE / '_site'
+OUT = HERE / 'docs'
 # Temporary: the bare site URL — the one the Lab 1 READMEs already link — opens the
 # engineering course. Set to 'courses/' once the all-courses page should be the front door.
 HOME = 'course/engineering/'
@@ -97,6 +97,9 @@ def fill(template, dest, **values):
 
 
 def main():
+    # Every build leaves .nojekyll in OUT; without it, OUT holds files a build did not make.
+    if OUT.exists() and not (OUT / '.nojekyll').exists():
+        sys.exit(f'{OUT.name}/ was not made by build.py — move its files out, then build again')
     shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(HERE / 'assets', OUT)
     (OUT / '.nojekyll').touch()   # serve the files as they are, no Jekyll pass
@@ -136,7 +139,7 @@ def main():
     if missing:
         # Fail rather than publish a course with a lecture silently gone.
         sys.exit('listed in courses.json but no PDF:\n  ' + '\n  '.join(missing))
-    print(f'_site/: {sum(map(len, groups.values()))} courses, / -> {HOME}')
+    print(f'{OUT.name}/: {sum(map(len, groups.values()))} courses, / -> {HOME}')
 
 
 if __name__ == '__main__':

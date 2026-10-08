@@ -7,8 +7,10 @@ Readers are students and applicants. How to add a lecture, preview and deploy is
 ## Layout and flow
 
 `courses.json` (everything shown) + `slides/<slug>/*.pdf` + `templates/` + `assets/` →
-`build.py` → `_site/` → GitHub Actions (`.github/workflows/deploy.yml`) publishes on every push
-to `main`. Pages source must stay **GitHub Actions**. Python 3, standard library only.
+`build.py` → `docs/` (committed) → GitHub Pages publishes it on every push to `main`
+(**Deploy from a branch: `main`, `/docs`** — not GitHub Actions: the owner's account is locked
+for Actions over billing). A change goes live only with its rebuilt `docs/` in the same push.
+Python 3, standard library only.
 
 | URL | Page |
 |---|---|
@@ -20,12 +22,16 @@ to `main`. Pages source must stay **GitHub Actions**. Python 3, standard library
 
 URLs are public and linked from elsewhere: do not rename slugs or paths without asking.
 
+Adding a lecture: the `deploy` skill (`.claude/skills/deploy/`) — fill, build, commit and push
+(the push deploys).
+
 ## Rules
 
 - **English**, short. Never link the private deck repo or its wiki from the site — readers do not have them.
 - **PDFs in `slides/` are originals.** Never delete, move or overwrite them without asking.
-  Only `_site/` is disposable; a script must never clear any other folder (a build once wiped
-  the only copies of five PDFs).
+  Only `docs/` (build output) is disposable; a script must never clear any other folder (a
+  build once wiped the only copies of five PDFs). Never keep files in `docs/` — `build.py`
+  refuses to clear a `docs/` without its `.nojekyll`.
 - **`engineering` lectures are generated** by `tools/sync_engineering.py` from the deck covers —
   do not hand-edit its `"lectures"`; its `"videos"` are edited by hand. `intro` is all by hand.
 - **Video links** are `watch?v=<id>&list=<playlist>&index=<position>`. `v=` is required: without
@@ -34,8 +40,8 @@ URLs are public and linked from elsewhere: do not rename slugs or paths without 
   confirm id and order from the playlist feed —
   `https://www.youtube.com/feeds/videos.xml?playlist_id=<id>` lists ids and titles in order —
   or a video's title via `https://www.youtube.com/oembed?url=https://youtu.be/<id>&format=json`.
-- **The build fails on a listed PDF that is missing** — keep it that way: a failed deploy leaves
-  the live site as it was.
+- **The build fails on a listed PDF that is missing** — keep it that way, and never commit
+  `docs/` from a failed build: the live site is whatever `docs/` on `main` holds.
 
 ## Design (decided with the owner — keep unless asked)
 
@@ -53,7 +59,7 @@ URLs are public and linked from elsewhere: do not rename slugs or paths without 
   (imath.kiev.ua). No year.
 - Before pushing a visual change, render it — light, dark and 390 px wide — and look:
   ```bash
-  python3 -m http.server 8000 -d _site    # or headless Chrome --screenshot on _site/**/index.html
+  python3 -m http.server 8000 -d docs    # or headless Chrome --screenshot on docs/**/index.html
   ```
 
 Commit messages in English.
