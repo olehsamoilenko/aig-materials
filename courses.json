@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "engineering",
+    "status": "Ongoing",
+    "title": "Autonomous Robotic Systems Engineering",
+    "eyebrow": "Master's course",
+    "tagline": "ROS 2 · Gazebo · State Estimation · Computer Vision · Navigation",
+    "register": "https://docs.google.com/forms/d/e/1FAIpQLScCTDKY3T2xE_e-Do9QXVDI1CvSG9J3W2S0fOVt3imIYhin_Q/viewform",
+    "playlist": "https://www.youtube.com/playlist?list=PLBeDJyZEjxEo",
+    "lectures": [
+      {
+        "num": 0,
+        "title": "The Course and ROS 2",
+        "topics": "Course content · Labs · Grading · ROS 2 · Lab 0",
+        "pdf": "lecture-00-intro.pdf"
+      },
+      {
+        "num": 1,
+        "title": "Gazebo and ROS 2",
+        "topics": "Simulator · Physics · Plugins · Fuel · Headless · ROS 2 bridge · RViz · Lab 0.1",
+        "pdf": "lecture-01-gazebo.pdf"
+      },
+      {
+        "num": 2,
+        "title": "Open-Source Robots",
+        "sub": "Standard models, plugins and packages, off the shelf",
+        "topics": "The catalogue · A robot in the world · Sensors · Odometry · Motors · Control · Teleop · RViz · Lab 1",
+        "pdf": "lecture-02-fuel-and-control.pdf"
+      },
+      {
+        "num": 3,
+        "title": "Inside the Drive",
+        "sub": "From a Twist to turning wheels and spinning rotors",
+        "topics": "Differential drive · Inside the plugin · Odometry · Four wheels · One wheel · Hardware · Rotors",
+        "pdf": "lecture-03-inside-the-drive.pdf"
+      }
+    ],
+    "videos": {
+      "0": "https://www.youtube.com/watch?v=eaUMphrXN6M&list=PLBeDJyZEjxEo&index=1",
+      "1": "https://www.youtube.com/watch?v=rybYbZVX8qI&list=PLBeDJyZEjxEo&index=2",
+      "2": "https://www.youtube.com/watch?v=D-PPyDowY_8&list=PLBeDJyZEjxEo&index=3",
+      "3": "https://www.youtube.com/watch?v=1toelWxVnjs&list=PLBeDJyZEjxEo&index=4"
+    }
+  },
+  {
+    "slug": "intro",
+    "status": "Ongoing",
+    "title": "Introduction to Autonomous Systems",
+    "eyebrow": "Master's course",
+    "tagline": "Dynamical Systems · State Estimation · Optimal Control · Reinforcement Learning · World Models",
+    "register": "https://docs.google.com/forms/d/e/1FAIpQLScCTDKY3T2xE_e-Do9QXVDI1CvSG9J3W2S0fOVt3imIYhin_Q/viewform",
+    "playlist": "https://www.youtube.com/playlist?list=PLCwTF9SaVAuc",
+    "lectures": [
+      {
+        "num": 1,
+        "title": "Introduction",
+        "sub": "Module I",
+        "pdf": "ias-lec01-introduction.pdf",
+        "topics": "Autonomy spectrum · Perception–Decision–Action loop · The system tuple · Historical arc"
+      },
+      {
+        "num": 2,
+        "title": "Dynamical Systems",
+        "sub": "Module II",
+        "pdf": "ias-lec02-dynamical-systems.pdf",
+        "topics": "State–space models · Mechanics · Partial Observability"
+      },
+      {
+        "num": 3,
+        "title": "Dynamical Systems (II)",
+        "sub": "Module II",
+        "pdf": "ias-lec03-dynamical-systems-2.pdf",
+        "topics": "Observability · Belief state · Flow & well-posedness · Stability · Linearisation · Discretisation"
+      },
+      {
+        "num": 4,
+        "title": "Probability and Optimisation",
+        "sub": "Module II",
+        "pdf": "ias-lec04-probability-optimization.pdf",
+        "topics": "Probability · Bayesian inference · Entropy · Convex optimisation · MAP estimation"
+      },
+      {
+        "num": 5,
+        "title": "State Estimation (I)",
+        "sub": "Module III",
+        "pdf": "ias-lec05-state-estimation-slides.pdf",
+        "topics": "Hidden-state problem · Belief · Bayes filter · Corridor example · Gaussian machinery (opening)"
+      }
+    ],
+    "videos": {
+      "1": "https://www.youtube.com/watch?v=NVAXlboJ4EA&list=PLCwTF9SaVAuc&index=1",
+      "2": "https://www.youtube.com/watch?v=yf3okO1_SYA&list=PLCwTF9SaVAuc&index=2",
+      "3": "https://www.youtube.com/watch?v=Xuv3kujwjTM&list=PLCwTF9SaVAuc&index=3",
+      "4": "https://www.youtube.com/watch?v=nf0GSlTbo_8&list=PLCwTF9SaVAuc&index=4",
+      "5": "https://www.youtube.com/watch?v=5vXt_Zsgw28&list=PLCwTF9SaVAuc&index=5"
+    }
+  }
+]
