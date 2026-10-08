@@ -32,15 +32,24 @@ and ask.
 
 ## 2. The entry in `courses.json`
 
-**`engineering`:** do not hand-edit its `"lectures"`. Run `python3 tools/sync_engineering.py`
-(deck repo at `../ros2-course`; if it is not there, ask for the path), then go to step 3.
+Both courses the same way. Read the cover — `pdftotext -f 1 -l 1 <pdf> -`, or Read with
+`pages: "1"`. Three lines: `LECTURE N — TITLE`, a second line, `Topics: …`.
 
-**`intro`:** read the cover — `pdftotext -f 1 -l 1 <pdf> -`, or Read with `pages: "1"`:
+**`intro`** — the second line is the course name and the module:
 
 ```
 LECTURE 6 — STATE ESTIMATION (II)
 INTRODUCTION TO AUTONOMOUS SYSTEMS · MODULE III
 Topics: Gaussian machinery · Closure theorems · Conjugacy · Kalman filter: predict, update, gain, algorithm
+```
+
+**`engineering`** — the second line is the deck's subtitle, or just the course name
+(`AUTONOMOUS ROBOTIC SYSTEMS ENGINEERING`, as in Lectures 0–1), which means no `sub`:
+
+```
+LECTURE 3 — INSIDE THE DRIVE
+FROM A TWIST TO TURNING WHEELS AND SPINNING ROTORS
+Topics: Differential drive · Inside the plugin · Odometry · Four wheels · One wheel · Hardware · Rotors
 ```
 
 Append to that course's `"lectures"`, keys in this order:
@@ -56,8 +65,13 @@ Append to that course's `"lectures"`, keys in this order:
 ```
 
 - `title`: the cover is all caps — write it in title case like the entries before it.
-- `sub`: `Module <roman>`. `topics`: verbatim (keep the deck's spelling, e.g. "Optimisation").
-- A cover that does not fit this shape: show the user what you read and ask.
+- `sub`: `intro` → `Module <roman>`. `engineering` → the subtitle in sentence case, names and
+  ROS terms capitalised as in earlier entries (`From a Twist to turning wheels and spinning
+  rotors`); omitted when the line is the course name.
+- `topics`: verbatim — the `Topics:` line is not uppercased (keep the deck's spelling, e.g.
+  "Optimisation").
+- A cover that does not fit this shape, or casing you cannot be sure of: show the user what
+  you read and ask.
 
 ## 3. The video
 
@@ -108,8 +122,7 @@ git commit -m "<Course short name>: Lecture N — <title>"
 git pull --rebase && git push
 ```
 
-- Commit only this lecture: the new PDF (for `engineering`, the PDFs the sync copied),
-  `courses.json` and `docs/`. Other uncommitted changes — name them and leave them out.
+- Commit only this lecture: the new PDF, `courses.json` and `docs/`. Other uncommitted changes — name them and leave them out.
 - Rebase conflict (someone pushed meanwhile): keep both sides in `courses.json`, then
   `python3 build.py`, `git add courses.json docs`, `git rebase --continue`. Never hand-merge
   `docs/` — rebuild it.

@@ -32,8 +32,9 @@ Adding a lecture: the `deploy` skill (`.claude/skills/deploy/`) — fill, build,
   Only `docs/` (build output) is disposable; a script must never clear any other folder (a
   build once wiped the only copies of five PDFs). Never keep files in `docs/` — `build.py`
   refuses to clear a `docs/` without its `.nojekyll`.
-- **`engineering` lectures are generated** by `tools/sync_engineering.py` from the deck covers —
-  do not hand-edit its `"lectures"`; its `"videos"` are edited by hand. `intro` is all by hand.
+- **Both courses work the same way:** a PDF in `slides/<slug>/`, its entry in `courses.json`
+  written from the cover, its video added when it is up. No course is synced or generated
+  from elsewhere.
 - **Video links** are `watch?v=<id>&list=<playlist>&index=<position>`. `v=` is required: without
   it YouTube ignores `index` and starts at the first video (checked 2026-10-08). `engineering`
   starts at Lecture 0 (`index` = N + 1), `intro` at Lecture 1 (`index` = N). Before adding,

@@ -11,28 +11,28 @@
       {
         "num": 0,
         "title": "The Course and ROS 2",
-        "topics": "Course content · Labs · Grading · ROS 2 · Lab 0",
-        "pdf": "lecture-00-intro.pdf"
+        "pdf": "lecture-00-intro.pdf",
+        "topics": "Course content · Labs · Grading · ROS 2 · Lab 0"
       },
       {
         "num": 1,
         "title": "Gazebo and ROS 2",
-        "topics": "Simulator · Physics · Plugins · Fuel · Headless · ROS 2 bridge · RViz · Lab 0.1",
-        "pdf": "lecture-01-gazebo.pdf"
+        "pdf": "lecture-01-gazebo.pdf",
+        "topics": "Simulator · Physics · Plugins · Fuel · Headless · ROS 2 bridge · RViz · Lab 0.1"
       },
       {
         "num": 2,
         "title": "Open-Source Robots",
         "sub": "Standard models, plugins and packages, off the shelf",
-        "topics": "The catalogue · A robot in the world · Sensors · Odometry · Motors · Control · Teleop · RViz · Lab 1",
-        "pdf": "lecture-02-fuel-and-control.pdf"
+        "pdf": "lecture-02-fuel-and-control.pdf",
+        "topics": "The catalogue · A robot in the world · Sensors · Odometry · Motors · Control · Teleop · RViz · Lab 1"
       },
       {
         "num": 3,
         "title": "Inside the Drive",
         "sub": "From a Twist to turning wheels and spinning rotors",
-        "topics": "Differential drive · Inside the plugin · Odometry · Four wheels · One wheel · Hardware · Rotors",
-        "pdf": "lecture-03-inside-the-drive.pdf"
+        "pdf": "lecture-03-inside-the-drive.pdf",
+        "topics": "Differential drive · Inside the plugin · Odometry · Four wheels · One wheel · Hardware · Rotors"
       }
     ],
     "videos": {
